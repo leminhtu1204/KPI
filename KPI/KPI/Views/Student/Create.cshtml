@@ -1,7 +1,36 @@
-﻿@model dynamic
+﻿@model DataAccess.Entity.Student
 
 @{
     ViewBag.Title = "title";
 }
 
-<h2>title</h2>
+<h2>Create</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="editor-label">
+        @Html.LabelFor(model => model.LastName)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.LastName)
+        @Html.ValidationMessageFor(model => model.LastName)
+    </div>
+    
+    <div class="editor-label">
+        @Html.LabelFor(model => model.FirstName)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.FirstName)
+        @Html.ValidationMessageFor(model => model.FirstName)
+    </div>
+    
+    <div class="editor-label">
+        @Html.LabelFor(model => model.EnrollmentDate)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.EnrollmentDate)
+        @Html.ValidationMessageFor(model => model.EnrollmentDate)
+    </div>
+    
+    <input type="submit" value="Create" />
+}

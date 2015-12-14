@@ -5,22 +5,45 @@
 }
 
 <h2>Student Detail</h2>
-<div class="display-label">
-    @Html.DisplayNameFor(model => model.LastName)
-</div>
-<div class="display-field">
-    @Html.DisplayFor(model => model.LastName)
-</div>
-<div class="display-label">
-    @Html.DisplayNameFor(model => model.FirstName)
-</div>
-<div class="display-field">
-    @Html.DisplayFor(model => model.FirstName)
-</div>
-<div class="display-label">
-    @Html.DisplayNameFor(model => model.EnrollmentDate)
-</div>
-<div class="display-field">
-    @Html.DisplayFor(model => model.EnrollmentDate)
-</div>
-
+<fieldset>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.LastName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LastName)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.FirstName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FirstName)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.EnrollmentDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EnrollmentDate)
+    </div>
+    <div class="display-field">
+        <table>
+            <tr>
+                <th>Course Title</th>
+                <th>Grade</th>
+            </tr>
+            @foreach (var item in Model.Enrollments)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Grade)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

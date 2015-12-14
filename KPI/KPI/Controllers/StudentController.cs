@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using System.Data;
+using System.Data.Entity;
+using System.Linq;
 using System.Web.Mvc;
 using DataAccess;
+using DataAccess.Entity;
 
 namespace KPI.Controllers
 {
@@ -34,6 +37,7 @@ namespace KPI.Controllers
 
         public ActionResult Create()
         {
+
             return View();
         }
 
@@ -41,18 +45,26 @@ namespace KPI.Controllers
         // POST: /Student/Create
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "LastName, FirstName, EnrollmentDate")]Student student)
         {
             try
             {
                 // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    context.Students.Add(student);
+                    context.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                
             }
-            catch
+            catch(DataException)
             {
-                return View();
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+                
             }
+            return View(student);
         }
 
         //
@@ -60,51 +72,82 @@ namespace KPI.Controllers
 
         public ActionResult Edit(int id)
         {
-            return View();
+            var student = context.Students.Find(id);
+            if (student == null)
+            {
+                return HttpNotFound();
+            }
+            return View(student);
         }
 
         //
         // POST: /Student/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "StudentId, LastName, FirstName, EnrollmentDate")] Student student)
         {
             try
             {
                 // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
+                    context.Entry(student).State = EntityState.Modified;
+                    context.SaveChanges();
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "Unable to save changes.");
             }
+
+            return View(student);
         }
 
         //
         // GET: /Student/Delete/5
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id, bool? saveChangesError=false)
         {
-            return View();
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Delete failed.";
+            }
+            Student student = context.Students.Find(id);
+            if (student == null)
+            {
+                return HttpNotFound();
+            }
+            return View(student);
         }
 
         //
         // POST: /Student/Delete/5
 
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                var studentForDelete = new Student{StudentId = id};
+                context.Entry(studentForDelete).State = EntityState.Deleted;
+                context.SaveChanges();
             }
-            catch
+            catch (DataException/* dex */)
             {
-                return View();
+                // uncomment dex and log error. 
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
             }
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            context.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
