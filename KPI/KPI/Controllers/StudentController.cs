@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using DataAccess;
 using DataAccess.Entity;
 using DataAccess.Repository;
+using DataAccess.UnitOfWork;
 
 namespace KPI.Controllers
 {
@@ -12,22 +13,19 @@ namespace KPI.Controllers
     {
         //
         // GET: /Student/
+        private UnitOfWork unitOfWork;
 
-        private IRepository studentRepository;
+        private IStudentRepository studentRepository;
 
-        public StudentController()
-        {
-            this.studentRepository = new StudentRepository();
-        }
-
-        public StudentController(IRepository _studentRepository)
+        public StudentController(IStudentRepository _studentRepository)
         {
             this.studentRepository = _studentRepository;
+            this.unitOfWork = _studentRepository.BeginUnitOfWork();
         }
 
         public ActionResult Index()
         {
-            return View(studentRepository.GetStudents());
+            return View(studentRepository.GetEntities());
         }
 
         //
@@ -35,7 +33,7 @@ namespace KPI.Controllers
 
         public ActionResult Details(int id)
         {
-            var student = studentRepository.GetStudentById(id);
+            var student = studentRepository.GetEntityById(id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -64,8 +62,8 @@ namespace KPI.Controllers
                 // TODO: Add insert logic here
                 if (ModelState.IsValid)
                 {
-                    studentRepository.InsertStudent(student);
-                    studentRepository.Save();
+                    studentRepository.InsertEntity(student);
+                    this.unitOfWork.SaveChanges();
                     return RedirectToAction("Index");
                 }
                 
@@ -83,7 +81,7 @@ namespace KPI.Controllers
 
         public ActionResult Edit(int id)
         {
-            var student = studentRepository.GetStudentById(id);
+            var student = studentRepository.GetEntityById(id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -103,8 +101,8 @@ namespace KPI.Controllers
                 // TODO: Add update logic here
                 if (ModelState.IsValid)
                 {
-                    studentRepository.UpdateStudent(student);
-                    studentRepository.Save();
+                    studentRepository.UpdateEntity(student);
+                    this.unitOfWork.SaveChanges();
 
                     return RedirectToAction("Index");
                 }
@@ -127,7 +125,7 @@ namespace KPI.Controllers
             {
                 ViewBag.ErrorMessage = "Delete failed.";
             }
-            Student student = studentRepository.GetStudentById(id);
+            Student student = studentRepository.GetEntityById(id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -143,8 +141,8 @@ namespace KPI.Controllers
         {
             try
             {
-                studentRepository.DeleteStudent(id);
-                studentRepository.Save();
+                studentRepository.DeleteEntity(id);
+                this.unitOfWork.SaveChanges();
             }
             catch (DataException/* dex */)
             {
@@ -152,12 +150,6 @@ namespace KPI.Controllers
                 return RedirectToAction("Delete", new { id = id, saveChangesError = true });
             }
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            studentRepository.Dispose();
-            base.Dispose(disposing);
         }
     }
 }

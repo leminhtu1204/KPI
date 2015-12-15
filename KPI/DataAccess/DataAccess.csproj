@@ -55,19 +55,17 @@
     <Compile Include="Entity\Enrollment.cs" />
     <Compile Include="Entity\Student.cs" />
     <Compile Include="Entity\UserProfile.cs" />
-    <Compile Include="Migrations\201512130721350_InitialCreate.cs" />
-    <Compile Include="Migrations\201512130721350_InitialCreate.Designer.cs">
-      <DependentUpon>201512130721350_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201512151453455_MaxLenth.cs" />
-    <Compile Include="Migrations\201512151453455_MaxLenth.Designer.cs">
-      <DependentUpon>201512151453455_MaxLenth.cs</DependentUpon>
+    <Compile Include="Migrations\201512151612275_updateDB.cs" />
+    <Compile Include="Migrations\201512151612275_updateDB.Designer.cs">
+      <DependentUpon>201512151612275_updateDB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\IStudentRepository.cs" />
+    <Compile Include="Repository\Repository.cs" />
     <Compile Include="Repository\StudentRepository.cs" />
+    <Compile Include="UnitOfWork\UnitOfWork.cs" />
     <Compile Include="UniversityContext.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -77,13 +75,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201512130721350_InitialCreate.resx">
-      <DependentUpon>201512130721350_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512151453455_MaxLenth.resx">
-      <DependentUpon>201512151453455_MaxLenth.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201512151612275_updateDB.resx">
+      <DependentUpon>201512151612275_updateDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

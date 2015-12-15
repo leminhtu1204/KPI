@@ -51,3 +51,11 @@ C:\LeMinhtu\KPI\KPI\KPI\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
 C:\LeMinhtu\KPI\KPI\KPI\obj\Debug\KPI.csprojResolveAssemblyReference.cache
 C:\LeMinhtu\KPI\KPI\KPI\obj\Debug\KPI.dll
 C:\LeMinhtu\KPI\KPI\KPI\obj\Debug\KPI.pdb
+C:\LeMinhtu\KPI\KPI\KPI\bin\Microsoft.Practices.ServiceLocation.dll
+C:\LeMinhtu\KPI\KPI\KPI\bin\Microsoft.Practices.Unity.Configuration.dll
+C:\LeMinhtu\KPI\KPI\KPI\bin\Microsoft.Practices.Unity.dll
+C:\LeMinhtu\KPI\KPI\KPI\bin\Unity.Mvc4.dll
+C:\LeMinhtu\KPI\KPI\KPI\bin\Microsoft.Practices.ServiceLocation.pdb
+C:\LeMinhtu\KPI\KPI\KPI\bin\Microsoft.Practices.ServiceLocation.xml
+C:\LeMinhtu\KPI\KPI\KPI\bin\Microsoft.Practices.Unity.xml
+C:\LeMinhtu\KPI\KPI\KPI\bin\Microsoft.Practices.Unity.Configuration.xml
