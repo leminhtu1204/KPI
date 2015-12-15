@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using DataAccess;
 using DataAccess.Entity;
+using DataAccess.Repository;
 
 namespace KPI.Controllers
 {
@@ -12,11 +13,21 @@ namespace KPI.Controllers
         //
         // GET: /Student/
 
-        UniversityContext context = new UniversityContext();
+        private IRepository studentRepository;
+
+        public StudentController()
+        {
+            this.studentRepository = new StudentRepository();
+        }
+
+        public StudentController(IRepository _studentRepository)
+        {
+            this.studentRepository = _studentRepository;
+        }
 
         public ActionResult Index()
         {
-            return View(context.Students.ToList());
+            return View(studentRepository.GetStudents());
         }
 
         //
@@ -24,7 +35,7 @@ namespace KPI.Controllers
 
         public ActionResult Details(int id)
         {
-            var student = context.Students.Find(id);
+            var student = studentRepository.GetStudentById(id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -53,8 +64,8 @@ namespace KPI.Controllers
                 // TODO: Add insert logic here
                 if (ModelState.IsValid)
                 {
-                    context.Students.Add(student);
-                    context.SaveChanges();
+                    studentRepository.InsertStudent(student);
+                    studentRepository.Save();
                     return RedirectToAction("Index");
                 }
                 
@@ -72,7 +83,7 @@ namespace KPI.Controllers
 
         public ActionResult Edit(int id)
         {
-            var student = context.Students.Find(id);
+            var student = studentRepository.GetStudentById(id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -92,8 +103,8 @@ namespace KPI.Controllers
                 // TODO: Add update logic here
                 if (ModelState.IsValid)
                 {
-                    context.Entry(student).State = EntityState.Modified;
-                    context.SaveChanges();
+                    studentRepository.UpdateStudent(student);
+                    studentRepository.Save();
 
                     return RedirectToAction("Index");
                 }
@@ -116,7 +127,7 @@ namespace KPI.Controllers
             {
                 ViewBag.ErrorMessage = "Delete failed.";
             }
-            Student student = context.Students.Find(id);
+            Student student = studentRepository.GetStudentById(id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -132,9 +143,8 @@ namespace KPI.Controllers
         {
             try
             {
-                var studentForDelete = new Student{StudentId = id};
-                context.Entry(studentForDelete).State = EntityState.Deleted;
-                context.SaveChanges();
+                studentRepository.DeleteStudent(id);
+                studentRepository.Save();
             }
             catch (DataException/* dex */)
             {
@@ -146,7 +156,7 @@ namespace KPI.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            context.Dispose();
+            studentRepository.Dispose();
             base.Dispose(disposing);
         }
     }

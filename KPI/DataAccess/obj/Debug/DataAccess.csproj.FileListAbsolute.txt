@@ -10,3 +10,4 @@ C:\LeMinhtu\KPI\KPI\DataAccess\obj\Debug\DataAccess.pdb
 C:\LeMinhtu\KPI\KPI\DataAccess\obj\Debug\DataAccess.Migrations.InitialCreate.resources
 C:\LeMinhtu\KPI\KPI\DataAccess\obj\Debug\DataAccess.csproj.GenerateResource.Cache
 C:\LeMinhtu\KPI\KPI\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
+C:\LeMinhtu\KPI\KPI\DataAccess\obj\Debug\DataAccess.Migrations.MaxLenth.resources
