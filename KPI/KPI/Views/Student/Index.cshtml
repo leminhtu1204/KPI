@@ -4,39 +4,46 @@
     ViewBag.Title = "title";
 }
 
-<h2>title</h2>
-@Html.ActionLink("Create", "Create") |
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EnrollmentDate)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EnrollmentDate)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.StudentId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.StudentId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.StudentId })
-            </td>
+<button class="btn-success" type="button" onclick="location.href='@Url.Action("Create", "Student")'" >
+    Create New
+</button>
+<table class="table">
+    <thead>
+        <tr class="filters">
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EnrollmentDate)
+            </th>
+            <th></th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        <tr>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnrollmentDate)
+                </td>
+                <td>
+                    <button class="btn btn-success" type="button" onclick="location.href='@Url.Action("Edit", "Student", new { id = item.StudentId })'" >Edit</button>
+                    <button class="btn btn-info" type="button" onclick="location.href='@Url.Action("Details", "Student", new { id = item.StudentId })'" >Details</button>
+                    <button class="btn btn-danger" type="button" onclick="location.href='@Url.Action("Delete", "Student", new { id = item.StudentId })'" >Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+
