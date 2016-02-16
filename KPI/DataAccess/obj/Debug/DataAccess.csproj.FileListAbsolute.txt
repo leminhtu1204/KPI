@@ -10,3 +10,15 @@ C:\LeMinhtu\KPI\KPI\DataAccess\obj\Debug\DataAccess.pdb
 C:\LeMinhtu\KPI\KPI\DataAccess\obj\Debug\DataAccess.Migrations.updateDB.resources
 C:\LeMinhtu\KPI\KPI\DataAccess\obj\Debug\DataAccess.csproj.GenerateResource.Cache
 C:\LeMinhtu\KPI\KPI\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
+D:\Review\KPI\KPI\KPI\DataAccess\bin\Debug\DataAccess.dll.config
+D:\Review\KPI\KPI\KPI\DataAccess\bin\Debug\DataAccess.dll
+D:\Review\KPI\KPI\KPI\DataAccess\bin\Debug\DataAccess.pdb
+D:\Review\KPI\KPI\KPI\DataAccess\bin\Debug\EntityFramework.dll
+D:\Review\KPI\KPI\KPI\DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+D:\Review\KPI\KPI\KPI\DataAccess\bin\Debug\EntityFramework.xml
+D:\Review\KPI\KPI\KPI\DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+D:\Review\KPI\KPI\KPI\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
+D:\Review\KPI\KPI\KPI\DataAccess\obj\Debug\DataAccess.Migrations.updateDB.resources
+D:\Review\KPI\KPI\KPI\DataAccess\obj\Debug\DataAccess.csproj.GenerateResource.Cache
+D:\Review\KPI\KPI\KPI\DataAccess\obj\Debug\DataAccess.dll
+D:\Review\KPI\KPI\KPI\DataAccess\obj\Debug\DataAccess.pdb
